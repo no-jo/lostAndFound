@@ -1,4 +1,5 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
+
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const items = [
@@ -11,6 +12,10 @@ export class InMemoryDataService implements InMemoryDbService {
         { id: 7, name: 'keys', lostDate: null, foundDate: "1990-02-25" },
     ];
 
-    return {items};
+    const requests = [
+        {id: 1, user: 'john', submissionDate: "2017-07-02", itemId: 2, status: 'pending', adminDecision: null}
+    ];
+
+    return {items, requests};
   }
 }

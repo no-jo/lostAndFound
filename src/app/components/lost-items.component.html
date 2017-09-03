@@ -1,7 +1,7 @@
-<h3>This is all currently lost items</h3>
+<h3>These are all currently lost items</h3>
 
 <ul class="items">
-  <li *ngFor="let item of items" (click)="onSelect(item)" [class.selected]="item === selectedItem">
+  <li *ngFor="let item of items" [routerLink]="['/detail', item.id]">
     <span class="badge">{{item.id}}</span>
     <span>{{item.name}}</span>
     <span>{{item.lostDate}}</span>

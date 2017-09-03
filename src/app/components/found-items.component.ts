@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Item }        from '../enitities/item';
+import { Item } from '../enitities/item';
 
 import { ItemService } from '../services/item.service';
 
 @Component({
   selector: 'found-items',
   templateUrl: './found-items.component.html',
-  styleUrls: [ './items.component.css' ]
+  styleUrls: ['./items.component.css']
 })
 
 export class FoundItemsComponent implements OnInit {
@@ -17,7 +17,7 @@ export class FoundItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemService.getItems()
-    .then(items => { this.items = items.filter(i => i.foundDate != null) });
+      .then(items => { this.items = items.filter(i => i.foundDate != null)});
   }
 
   add(name: string, date: Date): void {
