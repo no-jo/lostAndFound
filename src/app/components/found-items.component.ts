@@ -20,6 +20,13 @@ export class FoundItemsComponent implements OnInit {
       .then(items => { this.items = items.filter(i => i.foundDate != null)});
   }
 
+  getItemsBy(name: string, foundDate: Date): void {
+    const lostDate = null;
+    name = name.trim();
+    this.itemService.getItemsBy(name, lostDate, foundDate)
+      .then(items => { this.items = items.filter(i => i.foundDate !== null) });
+  }
+
   add(name: string, date: Date): void {
     name = name.trim();
     if (!name || !date) { return; }

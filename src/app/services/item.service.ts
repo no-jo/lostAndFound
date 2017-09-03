@@ -28,6 +28,14 @@ export class ItemService {
       .catch(this.handleError);
   }
 
+  getItemsBy(name: string, lostDate: Date, foundDate: Date): Promise<Item[]> {
+    const url = `${this.itemsUrl}/?lostDate=${lostDate}&foundDate=${foundDate}&name=${name}`;
+    return this.http.get(url)
+    .toPromise()
+    .then(response => response.json().data as Item[])
+    .catch(this.handleError);
+  }
+
   delete(id: number): Promise<void> {
     const url = `${this.itemsUrl}/${id}`;
     return this.http.delete(url, { headers: this.headers })

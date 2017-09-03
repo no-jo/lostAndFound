@@ -27,6 +27,12 @@
     background-color: #BBD8DC !important;
     color: white;
   }
+  .items li .date {
+    float: right;
+    position: relative;
+    top: -3px;
+    margin: .5em;
+  }
   .items .text {
     position: relative;
     top: -3px;

@@ -1,10 +1,24 @@
-<h3>These are all currently lost items</h3>
+<br>
+<div>
+  Insert search criteria: <br>
+  <label>name </label>
+  <input #searchItemName />
+  <label>  date </label>
+  <input type="date" #searchItemDate />
+  <button (click)="getItemsBy(searchItemName.value, searchItemDate.value)">
+    Filter
+  </button>
+  <button (click)="ngOnInit(); searchItemName.value =''">
+    Reset
+  </button>
+</div>
 
+<h3>These are all lost items</h3>
 <ul class="items">
   <li *ngFor="let item of items" [routerLink]="['/detail', item.id]">
     <span class="badge">{{item.id}}</span>
     <span>{{item.name}}</span>
-    <span>{{item.lostDate}}</span>
+    <span class="date">{{item.lostDate}}</span>
   </li>
 </ul>
 

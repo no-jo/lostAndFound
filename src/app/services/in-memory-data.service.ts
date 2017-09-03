@@ -10,6 +10,8 @@ export class InMemoryDataService implements InMemoryDbService {
         { id: 5, name: 'mug', lostDate:"1993-02-08", foundDate: null },
         { id: 6, name: 'umbrella', lostDate: null, foundDate: "1990-02-26"},
         { id: 7, name: 'keys', lostDate: null, foundDate: "1990-02-25" },
+        { id: 8, name: 'dog', lostDate: "2017-09-03", foundDate: null },
+        { id: 9, name: 'cat', lostDate: "2017-09-03", foundDate: null }
     ];
 
     const requests = [
