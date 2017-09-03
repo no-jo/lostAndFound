@@ -1,8 +1,20 @@
-<h3>This is found</h3>
+<h3>This is all currently found items</h3>
+
 <ul class="items">
-    <li *ngFor="let item of items" (click)="onSelect(item)"
-        [class.selected]="item === selectedItem">
-      <span class="badge">{{item.id}}</span>
-      <span>{{item.name}}</span>
+    <li *ngFor="let item of items" (click)="onSelect(item)" [class.selected]="item === selectedItem">
+        <span class="badge">{{item.id}}</span>
+        <span>{{item.name}}</span>
+        <span>{{item.foundDate}}</span>
     </li>
-  </ul>
+</ul>
+
+<div>
+    Report found item: <br>
+    <label>name </label>
+    <input #itemName />
+    <label>  date </label>
+    <input type="date" #itemDate />
+    <button (click)="add(itemName.value, itemDate.value); itemName.value=''">
+      Add
+    </button>
+</div>

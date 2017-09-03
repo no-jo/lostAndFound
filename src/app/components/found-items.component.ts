@@ -17,6 +17,13 @@ export class FoundItemsComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemService.getItems()
-    .then(items => { this.items = items.filter(i => i.found === true) });
+    .then(items => { this.items = items.filter(i => i.foundDate != null) });
+  }
+
+  add(name: string, date: Date): void {
+    name = name.trim();
+    if (!name || !date) { return; }
+    this.itemService.createFound(name, date)
+      .then(item => { this.items.push(item); });
   }
 }

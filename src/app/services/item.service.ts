@@ -36,9 +36,17 @@ export class ItemService {
       .catch(this.handleError);
   }
 
-  create(name: string): Promise<Item> {
+  createLost(name: string, lostDate: Date): Promise<Item> {
     return this.http
-      .post(this.itemsUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .post(this.itemsUrl, JSON.stringify({name: name, lostDate:lostDate, lost: true}), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data as Item)
+      .catch(this.handleError);
+  }
+
+  createFound(name: string, foundDate: Date): Promise<Item> {
+    return this.http
+      .post(this.itemsUrl, JSON.stringify({name: name, foundDate: foundDate, found: true}), {headers: this.headers})
       .toPromise()
       .then(res => res.json().data as Item)
       .catch(this.handleError);

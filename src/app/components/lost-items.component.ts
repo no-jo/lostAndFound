@@ -13,12 +13,17 @@ import { ItemService } from '../services/item.service';
 export class LostItemsComponent implements OnInit {
   items: Item[] = [];
 
-
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
     this.itemService.getItems()
-      .then(items => { this.items = items.filter(i => i.lost === true) });
+      .then(items => { this.items = items.filter(i => i.lostDate !== null) });
   }
 
+  add(name: string, date: Date): void {
+    name = name.trim();
+    if (!name || !date) { return; }
+    this.itemService.createLost(name, date)
+      .then(item => { this.items.push(item); });
+  }
 }
