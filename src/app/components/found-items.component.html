@@ -1,1 +1,8 @@
-<h1>This is found</h1>
+<h3>This is found</h3>
+<ul class="items">
+    <li *ngFor="let item of items" (click)="onSelect(item)"
+        [class.selected]="item === selectedItem">
+      <span class="badge">{{item.id}}</span>
+      <span>{{item.name}}</span>
+    </li>
+  </ul>
