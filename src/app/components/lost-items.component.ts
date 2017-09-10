@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Item } from '../enitities/item';
 
 import { ItemService } from '../services/item.service';
+import { CustomModalComponent } from '../components/custom-modal.component';
 
 @Component({
   selector: 'lost-items',
