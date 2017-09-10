@@ -7,8 +7,7 @@ import { Item } from '../enitities/item';
 
 @Component({
     selector: 'item-detail',
-    templateUrl: './item-detail.component.html',
-    styleUrls: ['./item-detail.component.css']
+    templateUrl: './item-detail.component.html'
 })
 
 export class ItemDetailComponent implements OnInit {

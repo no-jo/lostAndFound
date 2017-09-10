@@ -1,7 +1,23 @@
-<h1>{{title}}</h1>
-<nav>
-  <a routerLink="/lost" routerLinkActive="active">Lost Items</a>
-  <a routerLink="/found" routerLinkActive="active">Found Items</a>
-</nav>
-<router-outlet></router-outlet>
+<body>
+  <nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">Lost'n'Found</a>
+        <a class="btn btn-primary btn-lg" routerLink="/lost" routerLinkActive="active">Lost Items</a>
+        <a class="btn btn-primary btn-lg" routerLink="/found" routerLinkActive="active">Found Items</a>
+      </div>
+    </div>
+  </nav>
+  <div class="jumbotron"></div>
+  <div class="container">
+    <router-outlet></router-outlet>
+  </div>
 
+  <hr>
+  <div class="container">
+    <footer>
+      <p>&copy;Lost'n'Found by &copy;Capgemini Starter Kit IV</p>
+    </footer>
+  </div>
+
+</body>

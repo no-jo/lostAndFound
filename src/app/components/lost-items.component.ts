@@ -6,8 +6,7 @@ import { ItemService } from '../services/item.service';
 
 @Component({
   selector: 'lost-items',
-  templateUrl: './lost-items.component.html',
-  styleUrls: ['./items.component.css']
+  templateUrl: './lost-items.component.html'
 })
 
 export class LostItemsComponent implements OnInit {
