@@ -11,28 +11,33 @@
         <input type="date" #searchItemDate class="form-control" id="dateLost">
       </div>
       <div align=right>
-      <button type="submit" class="btn btn-default" (click)="getItemsBy(searchItemName.value, searchItemDate.value)">Submit</button>
-      <button type="submit" class="btn btn-default" (click)="ngOnInit()"> Reset</button>
-      <button type="submit" class="btn btn-default" (click)="addNewItemInModal()"> Add new</button>
+        <button type="submit" class="btn btn-default" (click)="getItemsBy(searchItemName.value, searchItemDate.value)">Submit</button>
+        <button type="submit" class="btn btn-default" (click)="ngOnInit()"> Reset</button>
+        <button type="submit" class="btn btn-default" (click)="addNewItemInModal()"> Add new</button>
       </div>
     </form>
   </div>
 </div>
-
+<br>
 <table class="table table-hover">
   <thead>
     <tr>
       <th>#</th>
       <th>name</th>
       <th>date lost</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of items" (click)="showDetail(item.id)">
+    <tr *ngFor="let item of items">
       <th scope=row>{{item.id}}</th>
       <td>{{item.name}}</td>
       <td>{{item.lostDate | date:'yyyy-MM-dd'}}</td>
-      <td><button type="submit" class="btn btn-warning" (click)="remove(item); $event.stopPropagation()"> Delete</button>
+      <td>
+        <item-detail-modal [item]='item'></item-detail-modal>
+        <button class="btn btn-warning" mwlConfirmationPopover [title]="'WARNING'" [message]="'Are you sure?'" placement="right"
+          (confirm)="remove(item)"> Delete</button>
+      </td>
     </tr>
   </tbody>
 </table>
