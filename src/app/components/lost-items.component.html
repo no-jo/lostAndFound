@@ -1,19 +1,24 @@
-<br>
-<div>
-  Insert search criteria: <br>
-  <label>name </label>
-  <input #searchItemName />
-  <label>  date </label>
-  <input type="date" #searchItemDate />
-  <button (click)="getItemsBy(searchItemName.value, searchItemDate.value)">
-    Filter
-  </button>
-  <button (click)="ngOnInit(); searchItemName.value =''">
-    Reset
-  </button>
+<div class="row">
+  <div class="col-md-6">
+    <form>
+      <h4> Insert search criteria </h4>
+      <div class="form-group">
+        <label for="itemName">Item name:</label>
+        <input type="text" #searchItemName class="form-control" id="itemName" placeholder="Name">
+      </div>
+      <div class="form-group">
+        <label for="dateLost">Date lost:</label>
+        <input type="date" #searchItemDate class="form-control" id="dateLost">
+      </div>
+      <div align=right>
+      <button type="submit" class="btn btn-default" (click)="getItemsBy(searchItemName.value, searchItemDate.value)">Submit</button>
+      <button type="submit" class="btn btn-default" (click)="ngOnInit()"> Reset</button>
+      <button type="submit" class="btn btn-default" (click)="addNewItemInModal()"> Add new</button>
+      </div>
+    </form>
+  </div>
 </div>
 
-<h3>These are all lost items</h3>
 <table class="table table-hover">
   <thead>
     <tr>
@@ -23,15 +28,13 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let item of items" [routerLink]="['/detail', item.id]">
+    <tr *ngFor="let item of items" (click)="showDetail(item.id)">
       <th scope=row>{{item.id}}</th>
       <td>{{item.name}}</td>
       <td>{{item.lostDate}}</td>
     </tr>
   </tbody>
 </table>
-
-<custom-modal></custom-modal>
 <div>
   Report lost item: <br>
   <label>name </label>

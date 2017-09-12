@@ -11,7 +11,6 @@ import { AppComponent } from './app.component';
 import { FoundItemsComponent } from './components/found-items.component';
 import { LostItemsComponent } from './components/lost-items.component';
 import { ItemDetailComponent } from './components/item-detail.component';
-import { CustomModalComponent } from './components/custom-modal.component';
 
 import { ItemService } from './services/item.service';
 
@@ -23,8 +22,7 @@ import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
     AppComponent,
     FoundItemsComponent,
     LostItemsComponent,
-    ItemDetailComponent,
-    CustomModalComponent
+    ItemDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +31,7 @@ import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     FormsModule,
     ModalModule.forRoot(),
-    BootstrapModalModule
+    BootstrapModalModule,
   ],
   providers: [ItemService],
   bootstrap: [AppComponent]
