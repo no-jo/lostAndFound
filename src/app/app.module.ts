@@ -25,7 +25,6 @@ import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-
     FormsModule,
     ModalModule.forRoot(),
     BootstrapModalModule,

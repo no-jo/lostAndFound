@@ -31,7 +31,7 @@
     <tr *ngFor="let item of items" (click)="showDetail(item.id)">
       <th scope=row>{{item.id}}</th>
       <td>{{item.name}}</td>
-      <td>{{item.lostDate}}</td>
+      <td>{{item.lostDate | date:'yyyy-MM-dd'}}</td>
       <td><button type="submit" class="btn btn-warning" (click)="remove(item); $event.stopPropagation()"> Delete</button>
     </tr>
   </tbody>

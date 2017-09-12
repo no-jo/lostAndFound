@@ -3,6 +3,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Modal } from 'ngx-modialog/plugins/bootstrap';
 
 import { Item } from '../enitities/item';
+import { ItemSearchCriteria } from '../enitities/item-search-criteria';
 
 import { ItemService } from '../services/item.service';
 
@@ -24,10 +25,12 @@ export class LostItemsComponent implements OnInit {
   }
 
   getItemsBy(name: string, lostDate: Date): void {
-    const foundDate = null;
+    const searchCond: ItemSearchCriteria = new ItemSearchCriteria();
+    searchCond.nameLike = name;
+    searchCond.lostDateAfter = lostDate;
     name = name.trim();
-    this.itemService.getItemsBy(name, lostDate, foundDate)
-      .then(items => { this.items = items.filter(i => i.lostDate !== null) });
+    this.itemService.getItemsBy(searchCond)
+      .subscribe(res => { this.items = Array.from(res); });
   }
 
   add(name: string, date: Date): void {

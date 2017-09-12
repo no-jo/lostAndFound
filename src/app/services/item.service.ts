@@ -6,6 +6,7 @@ import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
 
 import { Item } from '../enitities/item';
+import { ItemSearchCriteria } from '../enitities/item-search-criteria';
 
 @Injectable()
 export class ItemService {
@@ -28,12 +29,11 @@ export class ItemService {
     return this.http.get(url).map(data => data.json());
   }
 
-  getItemsBy(name: string, lostDate: Date, foundDate: Date): Promise<Item[]> {
-    const url = `${this.itemsUrl}/?lostDate=${lostDate}&foundDate=${foundDate}&name=${name}`;
-    return this.http.get(url)
-    .toPromise()
-    .then(response => response.json().data as Item[])
-    .catch(this.handleError);
+  getItemsBy(searchCond: ItemSearchCriteria): Observable<Item[]> {
+    const url = `${this.itemsUrl}/`;
+    return this.http
+    .post(url, JSON.stringify(searchCond), { headers: this.headers })
+    .map(data => data.json());
   }
 
   delete(item: Item): Observable<Item> {

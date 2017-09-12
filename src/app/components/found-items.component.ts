@@ -18,12 +18,12 @@ export class FoundItemsComponent implements OnInit {
     this.itemService.getFoundItems().subscribe(data => this.items = data);
   }
 
-  getItemsBy(name: string, foundDate: Date): void {
-    const lostDate = null;
-    name = name.trim();
-    this.itemService.getItemsBy(name, lostDate, foundDate)
-      .then(items => { this.items = items.filter(i => i.foundDate !== null) });
-  }
+  // getItemsBy(name: string, foundDate: Date): void {
+  //   const lostDate = null;
+  //   name = name.trim();
+  //   this.itemService.getItemsBy(name, lostDate, foundDate)
+  //     .then(items => { this.items = items.filter(i => i.foundDate !== null) });
+  // }
 
   add(name: string, date: Date): void {
     name = name.trim();
