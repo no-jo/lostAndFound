@@ -20,8 +20,7 @@ export class LostItemsComponent implements OnInit {
     public modal: Modal) { }
 
   ngOnInit(): void {
-    this.itemService.getItems()
-      .then(items => { this.items = items.filter(i => i.lostDate !== null) });
+    this.itemService.getLostItems().subscribe(data => this.items = data);
   }
 
   getItemsBy(name: string, lostDate: Date): void {
@@ -34,21 +33,24 @@ export class LostItemsComponent implements OnInit {
   add(name: string, date: Date): void {
     name = name.trim();
     if (!name || !date) { return; }
-    this.itemService.createLost(name, date)
-      .then(item => { this.items.push(item); });
+    const newItem: Item = new Item();
+    newItem.name = name;
+    newItem.lostDate = date;
+    newItem.foundDate = null;
+    newItem.isActive = 'ACTIVE';
+    this.itemService.createLost(newItem).subscribe(data => this.items.push(data));
   }
 
   remove(item: Item): void {
     // this.itemService.delete(id).then(this.ngOnInit);
     this.itemService
-    .delete(item.id)
-    .then(() => {
-      this.items = this.items.filter(h => h !== item);
+    .delete(item).subscribe(res => {
+      this.items = this.items.filter(i => i.id !== res.id);
     });
   }
 
   showDetail(id: number): void {
-    this.itemService.getItem(id).then(item => { this.showModal(item); });
+    this.itemService.getItem(id).subscribe(item => { this.showModal(item); });
   }
 
   public showModal(item: Item): void {

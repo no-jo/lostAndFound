@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/map';
 
 import { Item } from '../enitities/item';
 
@@ -9,23 +11,21 @@ import { Item } from '../enitities/item';
 export class ItemService {
 
   private headers = new Headers({ 'Content-Type': 'application/json' });
-  private itemsUrl = 'api/items';
+  private itemsUrl = 'http://localhost:8080/item';
 
   constructor(private http: Http) { }
 
-  getItems(): Promise<Item[]> {
-    return this.http.get(this.itemsUrl)
-      .toPromise()
-      .then(response => response.json().data as Item[])
-      .catch(this.handleError);
+  getLostItems(): Observable<Item[]> {
+    return this.http.get(this.itemsUrl + '/lost').map(data => data.json());
   }
 
-  getItem(id: number): Promise<Item> {
-    const url = `${this.itemsUrl}/${id}`;
-    return this.http.get(url)
-      .toPromise()
-      .then(response => response.json().data as Item)
-      .catch(this.handleError);
+  getFoundItems(): Observable<Item[]> {
+    return this.http.get(this.itemsUrl + '/found').map(data => data.json());
+  }
+
+  getItem(id: number): Observable<Item> {
+    const url = `${this.itemsUrl}/id?id=${id}`;
+    return this.http.get(url).map(data => data.json());
   }
 
   getItemsBy(name: string, lostDate: Date, foundDate: Date): Promise<Item[]> {
@@ -36,20 +36,18 @@ export class ItemService {
     .catch(this.handleError);
   }
 
-  delete(id: number): Promise<void> {
-    const url = `${this.itemsUrl}/${id}`;
-    return this.http.delete(url, { headers: this.headers })
-      .toPromise()
-      .then(() => null)
-      .catch(this.handleError);
+  delete(item: Item): Observable<Item> {
+    const url = `${this.itemsUrl}/id?id=${item.id}`;
+    return this.http
+      .delete(url)
+      .map(data => data.json());
   }
 
-  createLost(name: string, lostDate: Date): Promise<Item> {
+  createLost(newItem: Item): Observable<Item> {
+    const url = `${this.itemsUrl}/id`;
     return this.http
-      .post(this.itemsUrl, JSON.stringify({ name: name, lostDate: lostDate, lost: true }), { headers: this.headers })
-      .toPromise()
-      .then(res => res.json().data as Item)
-      .catch(this.handleError);
+      .put(url, JSON.stringify(newItem), { headers: this.headers })
+      .map(data => data.json());
   }
 
   createFound(name: string, foundDate: Date): Promise<Item> {
@@ -63,7 +61,7 @@ export class ItemService {
   update(item: Item): Promise<Item> {
     const url = `${this.itemsUrl}/${item.id}`;
     return this.http
-      .put(url, JSON.stringify(item), { headers: this.headers })
+      .put(url, {body: JSON.stringify(item)}, { headers: this.headers })
       .toPromise()
       .then(() => item)
       .catch(this.handleError);

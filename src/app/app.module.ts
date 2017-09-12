@@ -4,9 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 
-import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './services/in-memory-data.service';
-
 import { AppComponent } from './app.component';
 import { FoundItemsComponent } from './components/found-items.component';
 import { LostItemsComponent } from './components/lost-items.component';
@@ -28,7 +25,7 @@ import { BootstrapModalModule } from 'ngx-modialog/plugins/bootstrap';
     BrowserModule,
     AppRoutingModule,
     HttpModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
+
     FormsModule,
     ModalModule.forRoot(),
     BootstrapModalModule,

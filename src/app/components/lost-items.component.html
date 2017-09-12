@@ -32,6 +32,7 @@
       <th scope=row>{{item.id}}</th>
       <td>{{item.name}}</td>
       <td>{{item.lostDate}}</td>
+      <td><button type="submit" class="btn btn-warning" (click)="remove(item); $event.stopPropagation()"> Delete</button>
     </tr>
   </tbody>
 </table>
@@ -41,7 +42,7 @@
   <input #itemName />
   <label>  date </label>
   <input type="date" #itemDate />
-  <button (click)="add(itemName.value, itemDate.value); itemName.value=''">
+  <button (click)="add(itemName.value, itemDate.value)">
     Add
   </button>
 </div>

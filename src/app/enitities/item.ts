@@ -3,4 +3,5 @@ export class Item {
   name: string;
   lostDate: Date;
   foundDate: Date;
+  isActive: string;
 }

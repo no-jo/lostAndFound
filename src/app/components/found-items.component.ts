@@ -15,8 +15,7 @@ export class FoundItemsComponent implements OnInit {
   constructor(private itemService: ItemService) { }
 
   ngOnInit(): void {
-    this.itemService.getItems()
-      .then(items => { this.items = items.filter(i => i.foundDate != null)});
+    this.itemService.getFoundItems().subscribe(data => this.items = data);
   }
 
   getItemsBy(name: string, foundDate: Date): void {
