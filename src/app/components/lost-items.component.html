@@ -1,23 +1,32 @@
 <div class="row">
-  <div class="col-md-6">
-    <form>
-      <h4> Insert search criteria </h4>
-      <div class="form-group">
-        <label for="itemName">Item name:</label>
-        <input type="text" #searchItemName class="form-control" id="itemName" placeholder="Name">
-      </div>
-      <div class="form-group">
-        <label for="dateLost">Date lost:</label>
-        <input type="date" #searchItemDate class="form-control" id="dateLost">
-      </div>
-      <div align=right>
-        <button type="submit" class="btn btn-default" (click)="getItemsBy(searchItemName.value, searchItemDate.value)">Submit</button>
-        <button type="submit" class="btn btn-default" (click)="ngOnInit()"> Reset</button>
-      </div>
-    </form>
-  </div>
-  <div class="col-md-6">
+  <div class="col-md-3">
     <add-item-modal (itemRet)="addNewItem($event)"></add-item-modal>
+  </div>
+  <div class="col-md-3">
+    <button class="btn btn-lg btn-outline-primary" data-toggle="collapse" data-target="#collapseSearchCriteria" aria-expanded="false"
+      aria-controls="collapseSearchCriteria">Search item</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-9">
+    <div class="collapse" id="collapseSearchCriteria">
+      <form>
+        <br>
+        <h4> Insert search criteria </h4>
+        <div class="form-group">
+          <label for="itemName">Item name:</label>
+          <input type="text" #searchItemName class="form-control" id="itemName" placeholder="Name">
+        </div>
+        <div class="form-group">
+          <label for="dateLost">Date lost:</label>
+          <input type="date" #searchItemDate class="form-control" id="dateLost">
+        </div>
+        <div align=right>
+          <button type="submit" class="btn btn-default" (click)="getItemsBy(searchItemName.value, searchItemDate.value)">Submit</button>
+          <button type="submit" class="btn btn-default" (click)="ngOnInit()"> Reset</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 <br>
