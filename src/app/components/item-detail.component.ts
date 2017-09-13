@@ -6,7 +6,7 @@ import { ItemService } from '../services/item.service';
 import { Item } from '../enitities/item';
 
 @Component({
-    selector: 'item-detail',
+    selector: 'app-item-detail',
     templateUrl: './item-detail.component.html'
 })
 

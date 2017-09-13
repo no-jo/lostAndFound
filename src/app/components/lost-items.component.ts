@@ -6,7 +6,7 @@ import { ItemSearchCriteria } from '../enitities/item-search-criteria';
 import { ItemService } from '../services/item.service';
 
 @Component({
-  selector: 'lost-items',
+  selector: 'app-lost-items',
   templateUrl: './lost-items.component.html'
 })
 
@@ -21,25 +21,17 @@ export class LostItemsComponent implements OnInit {
     this.itemService.getLostItems().subscribe(data => this.items = data);
   }
 
+  addNewItem(item: Item) {
+    this.items.push(item);
+  }
+
   getItemsBy(name: string, lostDate: Date): void {
     const searchCond: ItemSearchCriteria = new ItemSearchCriteria();
     searchCond.nameLike = name;
     searchCond.lostDateAfter = lostDate;
-    searchCond.foundDateIs = null;
     name = name.trim();
     this.itemService.getItemsBy(searchCond)
       .subscribe(res => { this.items = Array.from(res); });
-  }
-
-  add(name: string, date: Date): void {
-    name = name.trim();
-    if (!name || !date) { return; }
-    const newItem: Item = new Item();
-    newItem.name = name;
-    newItem.lostDate = date;
-    newItem.foundDate = null;
-    newItem.isActive = 'ACTIVE';
-    this.itemService.createLost(newItem).subscribe(data => this.items.push(data));
   }
 
   remove(item: Item): void {
