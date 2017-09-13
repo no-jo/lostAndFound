@@ -1,0 +1,27 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Modal title</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    <div class="modal-body">
+        <form data-toggle="validator">
+            <h5> Report lost item: </h5>
+            <div class="form-group has-danger">
+                <label class="form-control-label" for="newName"> Name </label>
+                <input type="text" id="newName" #itemName class="form-control form-control-danger" required ng-reqired/>
+            </div>
+            <div class="form-group">
+                <label for="newDate">  date </label>
+                <input id="newDate" type="date" #itemDate class="form-control" required max="{{today | date:'yyyy-MM-dd'}}" />
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary" (click)="add(itemName.value, itemDate.value); c('Close click')"> Add </button>
+        <button type="button" class="btn btn-default" (click)="c('Close click')">Cancel</button>
+</div>
+</ng-template>
+
+<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add item MODAL</button>

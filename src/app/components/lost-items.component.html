@@ -13,9 +13,11 @@
       <div align=right>
         <button type="submit" class="btn btn-default" (click)="getItemsBy(searchItemName.value, searchItemDate.value)">Submit</button>
         <button type="submit" class="btn btn-default" (click)="ngOnInit()"> Reset</button>
-        <button type="submit" class="btn btn-default" (click)="addNewItemInModal()"> Add new</button>
       </div>
     </form>
+  </div>
+  <div class="col-md-6">
+  <add-item-modal></add-item-modal>
   </div>
 </div>
 <br>
@@ -32,6 +34,7 @@
     <tr *ngFor="let item of items">
       <th scope=row>{{item.id}}</th>
       <td>{{item.name}}</td>
+      <td>     </td>
       <td>{{item.lostDate | date:'yyyy-MM-dd'}}</td>
       <td>
         <item-detail-modal [item]='item'></item-detail-modal>
@@ -41,13 +44,21 @@
     </tr>
   </tbody>
 </table>
-<div>
-  Report lost item: <br>
-  <label>name </label>
-  <input #itemName />
-  <label>  date </label>
-  <input type="date" #itemDate />
-  <button (click)="add(itemName.value, itemDate.value)">
-    Add
-  </button>
+<div class="row">
+    <div class="col-md-6">
+  <form data-toggle="validator">
+    <h5> Report lost item: </h5>
+    <div class="form-group has-danger">
+      <label class="form-control-label" for="newName"> Name </label>
+      <input type="text" id="newName" #itemName class="form-control form-control-danger" required ng-reqired/>
+    </div>
+      <div class="form-group">
+        <label for="newDate">  date </label>
+        <input id="newDate" type="date" #itemDate class="form-control" required max="{{today | date:'yyyy-MM-dd'}}" />
+      </div>
+      <div>
+        <button type="submit" class="btn btn-default" (click)="add(itemName.value, itemDate.value)"> Add </button>
+      </div>
+      </form>
+  </div>
 </div>

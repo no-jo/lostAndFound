@@ -11,6 +11,7 @@ import { FoundItemsComponent } from './components/found-items.component';
 import { LostItemsComponent } from './components/lost-items.component';
 import { ItemDetailComponent } from './components/item-detail.component';
 import { ItemDetailModalComponent } from './components/item-detail-modal.component';
+import { AddItemModalComponent } from './components/add-item-modal.component';
 
 import { ItemService } from './services/item.service';
 
@@ -20,7 +21,8 @@ import { ItemService } from './services/item.service';
     FoundItemsComponent,
     LostItemsComponent,
     ItemDetailComponent,
-    ItemDetailModalComponent
+    ItemDetailModalComponent,
+    AddItemModalComponent
   ],
   imports: [
     BrowserModule,

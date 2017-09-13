@@ -12,6 +12,7 @@ import { ItemService } from '../services/item.service';
 
 export class LostItemsComponent implements OnInit {
   items: Item[] = [];
+  today: Date = new Date();
 
   constructor(
     private itemService: ItemService) { }
@@ -24,6 +25,7 @@ export class LostItemsComponent implements OnInit {
     const searchCond: ItemSearchCriteria = new ItemSearchCriteria();
     searchCond.nameLike = name;
     searchCond.lostDateAfter = lostDate;
+    searchCond.foundDateIs = null;
     name = name.trim();
     this.itemService.getItemsBy(searchCond)
       .subscribe(res => { this.items = Array.from(res); });
@@ -47,8 +49,4 @@ export class LostItemsComponent implements OnInit {
       this.items = this.items.filter(i => i.id !== res.id);
     });
   }
-
-  // filterByLost(items: Item[]): void {
-  //   this.items = items.filter(i => i.lostDate !== null);
-  // }
 }

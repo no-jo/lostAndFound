@@ -3,8 +3,10 @@ export class ItemSearchCriteria {
     nameLike: string;
     lostDateAfter: Date;
     lostDateBefore: Date;
+    lostDateIs: Date;
     foundDateAfter: Date;
     foundDateBefore: Date;
+    foundDateIs: Date;
     creationDateAfter: Date;
     creationDateBefore: Date;
     sizeIs: string;
