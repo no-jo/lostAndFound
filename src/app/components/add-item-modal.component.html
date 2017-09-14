@@ -1,27 +1,63 @@
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Modal title</h4>
+        <h4 class="modal-title">Report lost item:</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
     </div>
     <div class="modal-body">
-        <form data-toggle="validator">
-            <h5> Report lost item: </h5>
-            <div class="form-group has-danger">
-                <label class="form-control-label" for="newName"> Name </label>
-                <input type="text" id="newName" #itemName class="form-control form-control-danger" required ng-reqired/>
+        <form #itemForm="ngForm" (ngSubmit)="add(); c('Close click')">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group has-danger">
+                        <label class="form-control-label" for="newName"> Name </label>
+                        <input type="text" name="newName" id="newName" [(ngModel)]="newItem.name" class="form-control form-control-danger" required
+                            ng-reqired/>
+                    </div>
+                    <div class="form-group">
+                        <label for="newDate">  Date lost </label>
+                        <input id="newDate" name="newLostDate" type="date" [(ngModel)]="newItem.lostDate" class="form-control" required max="{{today | date:'yyyy-MM-dd'}}"
+                        />
+                    </div>
+                    <div class="form-group">
+                        <label for="itemSizes">Select item size</label>
+                        <select class="form-control" id="itemSizes" name="itemSizes" [(ngModel)]="newItem.size">
+                  <option *ngFor="let size of sizes">{{size}}</option>
+                </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="category"> Category </label>
+                        <input type="text" name="category" id="category" [(ngModel)]="newItem.category" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-control-label" for="color"> Color </label>
+                        <input type="text" name="color" id="color" [(ngModel)]="newItem.color" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-control-label" for="material"> Material </label>
+                        <input type="text" name="material" id="material" [(ngModel)]="newItem.material" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea [(ngModel)]="newItem.description" class="form-control" id="description" name="desc" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputFile">Photo input</label>
+                        <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
+                        <small id="fileHelp" class="form-text text-muted">You are allowed to use one photo please choose one where the item is clearly visible.</small>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" [disabled]="!itemForm.form.valid"> Add </button>
+                        <button type="button" class="btn btn-default" (click)="c('Close click')">Cancel</button>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="newDate">  date </label>
-                <input id="newDate" type="date" #itemDate class="form-control" required max="{{today | date:'yyyy-MM-dd'}}" />
-            </div>
+
         </form>
     </div>
-    <div class="modal-footer">
-        <button type="submit" class="btn btn-primary" (click)="add(itemName.value, itemDate.value); c('Close click')"> Add </button>
-        <button type="button" class="btn btn-default" (click)="c('Close click')">Cancel</button>
-</div>
 </ng-template>
 
 <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Add new item</button>

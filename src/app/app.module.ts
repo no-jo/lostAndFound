@@ -14,6 +14,7 @@ import { ItemDetailModalComponent } from './components/item-detail-modal.compone
 import { AddItemModalComponent } from './components/add-item-modal.component';
 
 import { ItemService } from './services/item.service';
+import { MetadataService } from './services/metadata.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { ItemService } from './services/item.service';
       confirmButtonType: 'danger' // set defaults here
     }),
   ],
-  providers: [ItemService],
+  providers: [ItemService, MetadataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

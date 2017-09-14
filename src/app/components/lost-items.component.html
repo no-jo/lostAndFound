@@ -34,10 +34,11 @@
   <thead>
     <tr>
       <th>#</th>
-      <th>name</th>
-      <th>date lost</th>
-      <th></th>
-      <th></th>
+      <th>Name</th>
+      <th>Date lost</th>
+      <th>Size</th>
+      <th>Category</th>
+      <th>Action</th>
     </tr>
   </thead>
   <tbody>
@@ -45,10 +46,10 @@
       <th scope=row>{{item.id}}</th>
       <td>{{item.name}}</td>
       <td>{{item.lostDate | date:'yyyy-MM-dd'}}</td>
+      <td>{{item.size}}</td>
+      <td>{{item.category}}</td>
       <td>
         <item-detail-modal [item]='item'></item-detail-modal>
-      </td>
-      <td>
         <button class="btn btn-warning" mwlConfirmationPopover [title]="'WARNING'" [message]="'Are you sure?'" placement="right"
           (confirm)="remove(item)"> Delete</button>
       </td>
