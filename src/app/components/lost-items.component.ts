@@ -7,6 +7,7 @@ import { ItemService } from '../services/item.service';
 
 @Component({
   selector: 'app-lost-items',
+  styles: ['.sorting-btn {background-color: pink;} .sorting-btn-desc {background-color: yellow;}'],
   templateUrl: './lost-items.component.html'
 })
 
@@ -22,6 +23,7 @@ export class LostItemsComponent implements OnInit {
   }
 
   addNewItem(item: Item) {
+    let temp: Item = item;
     this.items.push(item);
   }
 
@@ -37,8 +39,29 @@ export class LostItemsComponent implements OnInit {
   remove(item: Item): void {
     // this.itemService.delete(id).then(this.ngOnInit);
     this.itemService
-    .delete(item).subscribe(res => {
-      this.items = this.items.filter(i => i.id !== res.id);
+      .delete(item).subscribe(res => {
+        this.items = this.items.filter(i => i.id !== res.id);
+      });
+  }
+
+  OrderByArray(orderType: any, order: number) {
+    let o;
+    if (order > 0) {
+      o = 1;
+    } else {
+      o = -1
+    }
+    let values = this.items;
+    return values.sort((a, b) => {
+      if (a[orderType] < b[orderType]) {
+        return -1 * o;
+      }
+
+      if (a[orderType] > b[orderType]) {
+        return 1 * o;
+      }
+
+      return 0
     });
   }
 }

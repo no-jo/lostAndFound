@@ -33,11 +33,12 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>#</th>
-      <th>Name</th>
-      <th>Date lost</th>
-      <th>Size</th>
-      <th>Category</th>
+      <th>#<button class="sorting-btn" (click)='OrderByArray("id",1)'></button><button class="sorting-btn-desc" (click)='OrderByArray("id",-1)'></button></th>
+      <th>Name<button class="sorting-btn" (click)='OrderByArray("name",1)'></button><button class="sorting-btn-desc" (click)='OrderByArray("name",-1)'></button></th>
+      <th>Lost on<button class="sorting-btn" (click)='OrderByArray("dateLost",1)'></button><button class="sorting-btn-desc" (click)='OrderByArray("dateLost",-1)'></button></th>
+      <th>Size<button class="sorting-btn" (click)='OrderByArray("size",1)'></button><button class="sorting-btn-desc" (click)='OrderByArray("size",-1)'></button></th>
+      <th>Category<button class="sorting-btn" (click)='OrderByArray("category",1)'></button><button class="sorting-btn-desc" (click)='OrderByArray("category",-1)'></button></th>
+      <th>Reported on<button class="sorting-btn" (click)='OrderByArray("creationDate",1)'></button><button class="sorting-btn-desc" (click)='OrderByArray("creationDate",-1)'></button></th>
       <th>Action</th>
     </tr>
   </thead>
@@ -48,6 +49,7 @@
       <td>{{item.lostDate | date:'yyyy-MM-dd'}}</td>
       <td>{{item.size}}</td>
       <td>{{item.category}}</td>
+      <td>{{item.creationDate | date:'yyyy-MM-dd hh:mm'}}</td>
       <td>
         <item-detail-modal [item]='item'></item-detail-modal>
         <button class="btn btn-warning" mwlConfirmationPopover [title]="'WARNING'" [message]="'Are you sure?'" placement="right"

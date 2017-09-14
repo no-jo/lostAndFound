@@ -6,11 +6,16 @@
     </button>
   </div>
   <div class="modal-body">
-    <div><label>id: </label> {{item.id}}</div>
-    <div>
-      <div> <label>name: </label>{{item.name}}</div>
-      <div *ngIf="item.lostDate"> <label>lost: </label>{{item.lostDate| date:'yyyy-MM-dd'}}</div>
-      <div *ngIf="item.foundDate"> <label>found: </label>{{item.foundDate| date:'yyyy-MM-dd'}}</div>
+    <div class="row">
+      <div class="col-md-6">
+        <div><label>id: </label> {{item.id}}</div>
+        <div> <label>name: </label>{{item.name}}</div>
+        <div *ngIf="item.lostDate"> <label>lost: </label>{{item.lostDate| date:'yyyy-MM-dd'}}</div>
+        <div *ngIf="item.foundDate"> <label>found: </label>{{item.foundDate| date:'yyyy-MM-dd'}}</div>
+      </div>
+      <div class="col-md-6">
+        <div> <img src={{item.photoURL}}> </div>
+      </div>
     </div>
   </div>
   <div class="modal-footer">

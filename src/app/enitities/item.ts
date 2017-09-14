@@ -10,4 +10,5 @@ export class Item {
   material: string;
   category: string;
   photoURL: string;
+  creationDate: Date;
 }

@@ -1,10 +1,11 @@
 import { Component, Input } from '@angular/core';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 import { Item } from '../enitities/item';
 
 @Component({
   selector: 'item-detail-modal',
+  styles: ['img{ width:360px};'],
   templateUrl: './item-detail-modal.component.html'
 })
 export class ItemDetailModalComponent {
@@ -15,7 +16,7 @@ export class ItemDetailModalComponent {
     private modalService: NgbModal) { }
 
   open(content) {
-    this.modalService.open(content);
+    this.modalService.open(content,{size:"lg"});
   }
 
 }

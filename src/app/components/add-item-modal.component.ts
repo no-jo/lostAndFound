@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Item } from '../enitities/item';
+import { FormsModule }   from '@angular/forms';
 
 import { ItemService } from '../services/item.service';
 import { MetadataService } from '../services/metadata.service';
@@ -22,6 +23,7 @@ export class AddItemModalComponent {
         private metaService: MetadataService) { }
 
     open(content) {
+        this.getSizes();
         this.modalService.open(content,{size: 'lg'});
     }
 
