@@ -95,7 +95,7 @@
         <td>{{item.category}}</td>
         <td>{{item.creationDate | date:'yyyy-MM-dd hh:mm'}}</td>
         <td>
-          <item-detail-modal [item]='item'></item-detail-modal>
+          <button class="btn btn-primary" routerLink="/detail/{{item.id}}" routerLinkActive="active">Details</button>
           <button class="btn btn-warning" mwlConfirmationPopover [title]="'WARNING'" [message]="'Are you sure?'" placement="right"
             (confirm)="remove(item)"> Delete</button>
         </td>

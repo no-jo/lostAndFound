@@ -1,10 +1,21 @@
-<div *ngIf="item">
-    <h2>{{item.name}} details!</h2>
-    <div><label>id: </label>{{item.id}}</div>
-    <div>
-        <div> <label>name: </label>{{item.name}}</div>
-        <div *ngIf="item.lostDate"> <label>lost: </label>{{item.lostDate}}</div>
-        <div *ngIf="item.foundDate"> <label>found: </label>{{item.foundDate}}</div> 
+<div class="row">
+    <div class="col-md-6">
+        <div><label>Id: </label> {{item.id}}</div>
+        <div> <label>Name: </label> {{item.name}}</div>
+        <div *ngIf="item.lostDate"> <label>Lost on: </label> {{item.lostDate| date:'yyyy-MM-dd'}}</div>
+        <div *ngIf="item.foundDate"> <label>Found on: </label> {{item.foundDate| date:'yyyy-MM-dd'}}</div>
+        <div> <label>Size: </label> {{item.size | lowercase }}</div>
+        <div> <label>Color: </label> {{item.color}}</div>
+        <div> <label>Category: </label> {{item.category}}</div>
+        <div> <label>Material: </label> {{item.material}}</div>
+        <div> <label>Reported on: </label> {{item.creationDate | date:'yyyy-MM-dd hh:mm'}}</div>
+    </div>
+    <div class="col-md-6">
+        <br>
+        <div> <img src={{item.photoURL}} style="height: 220px"> </div>
     </div>
 </div>
-<button (click)="goBack()">Back</button>
+<div class="row col-md-12">
+    <div> <label>Description: </label> {{item.description}}</div>
+</div>
+<button class='btn btn-primary' (click)="goBack()">Back</button>
