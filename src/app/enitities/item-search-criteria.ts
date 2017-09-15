@@ -1,12 +1,11 @@
 export class ItemSearchCriteria {
     idIs: number;
+    seekLost: boolean;
     nameLike: string;
     lostDateAfter: Date;
     lostDateBefore: Date;
-    lostDateIs: Date;
     foundDateAfter: Date;
     foundDateBefore: Date;
-    foundDateIs: Date;
     creationDateAfter: Date;
     creationDateBefore: Date;
     sizeIs: string;

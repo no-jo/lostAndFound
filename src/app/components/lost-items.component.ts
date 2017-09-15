@@ -4,6 +4,7 @@ import { Item } from '../enitities/item';
 import { ItemSearchCriteria } from '../enitities/item-search-criteria';
 
 import { ItemService } from '../services/item.service';
+import { MetadataService } from '../services/metadata.service';
 
 @Component({
   selector: 'app-lost-items',
@@ -14,12 +15,24 @@ import { ItemService } from '../services/item.service';
 export class LostItemsComponent implements OnInit {
   items: Item[] = [];
   today: Date = new Date();
+  searchCriteria: ItemSearchCriteria = new ItemSearchCriteria();
+  sizes: string[];
 
   constructor(
-    private itemService: ItemService) { }
+    private itemService: ItemService,
+    private metaService: MetadataService) { }
 
   ngOnInit(): void {
+    this.findAllLost();
+    this.listSizes();
+  }
+
+  findAllLost() : void {
     this.itemService.getLostItems().subscribe(data => this.items = data);
+  }
+
+  listSizes(): void {
+    this.metaService.getItemSizes().subscribe(data => this.sizes = data);
   }
 
   addNewItem(item: Item) {
@@ -27,13 +40,10 @@ export class LostItemsComponent implements OnInit {
     this.items.push(item);
   }
 
-  getItemsBy(name: string, lostDate: Date): void {
-    const searchCond: ItemSearchCriteria = new ItemSearchCriteria();
-    searchCond.nameLike = name;
-    searchCond.lostDateAfter = lostDate;
-    name = name.trim();
-    this.itemService.getItemsBy(searchCond)
-      .subscribe(res => { this.items = Array.from(res); });
+  getItemsBy(): void {
+    this.searchCriteria.seekLost = true;
+    this.itemService.getItemsBy(this.searchCriteria)
+      .subscribe(res => this.items = res );
   }
 
   remove(item: Item): void {

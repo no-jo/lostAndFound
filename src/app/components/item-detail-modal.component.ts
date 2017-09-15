@@ -5,7 +5,7 @@ import { Item } from '../enitities/item';
 
 @Component({
   selector: 'item-detail-modal',
-  styles: ['img{ height:200px};'],
+  styles: ['img{ height:220px};'],
   templateUrl: './item-detail-modal.component.html'
 })
 export class ItemDetailModalComponent {
