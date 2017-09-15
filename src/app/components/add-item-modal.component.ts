@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Item } from '../enitities/item';
 import { FormsModule }   from '@angular/forms';
 
@@ -12,7 +12,7 @@ import { NgbModal, NgbModalOptions, NgbActiveModal } from '@ng-bootstrap/ng-boot
     templateUrl: './add-item-modal.component.html'
 })
 export class AddItemModalComponent {
-
+    @Input() isLost: boolean = false;
     @Output() itemRet: EventEmitter<Item> = new EventEmitter<Item>();
     today: Date = new Date();
     sizes: string[] = [];

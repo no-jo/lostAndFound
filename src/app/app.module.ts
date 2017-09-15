@@ -12,6 +12,7 @@ import { LostItemsComponent } from './components/lost-items.component';
 import { ItemDetailComponent } from './components/item-detail.component';
 import { ItemDetailModalComponent } from './components/item-detail-modal.component';
 import { AddItemModalComponent } from './components/add-item-modal.component';
+import { WelcomeComponent } from './components/welcome.component';
 
 import { ItemService } from './services/item.service';
 import { MetadataService } from './services/metadata.service';
@@ -23,7 +24,8 @@ import { MetadataService } from './services/metadata.service';
     LostItemsComponent,
     ItemDetailComponent,
     ItemDetailModalComponent,
-    AddItemModalComponent
+    AddItemModalComponent,
+    WelcomeComponent
   ],
   imports: [
     BrowserModule,

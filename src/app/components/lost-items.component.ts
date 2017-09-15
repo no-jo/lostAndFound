@@ -8,7 +8,6 @@ import { MetadataService } from '../services/metadata.service';
 
 @Component({
   selector: 'app-lost-items',
-  styles: ['.sorting-btn {background-color: pink;} .sorting-btn-desc {background-color: yellow;}'],
   templateUrl: './lost-items.component.html'
 })
 
@@ -27,7 +26,8 @@ export class LostItemsComponent implements OnInit {
     this.listSizes();
   }
 
-  findAllLost() : void {
+  findAllLost(): void {
+    this.searchCriteria = new ItemSearchCriteria();
     this.itemService.getLostItems().subscribe(data => this.items = data);
   }
 
@@ -43,11 +43,10 @@ export class LostItemsComponent implements OnInit {
   getItemsBy(): void {
     this.searchCriteria.seekLost = true;
     this.itemService.getItemsBy(this.searchCriteria)
-      .subscribe(res => this.items = res );
+      .subscribe(res => this.items = res);
   }
 
   remove(item: Item): void {
-    // this.itemService.delete(id).then(this.ngOnInit);
     this.itemService
       .delete(item).subscribe(res => {
         this.items = this.items.filter(i => i.id !== res.id);
@@ -66,11 +65,9 @@ export class LostItemsComponent implements OnInit {
       if (a[orderType] < b[orderType]) {
         return -1 * o;
       }
-
       if (a[orderType] > b[orderType]) {
         return 1 * o;
       }
-
       return 0
     });
   }

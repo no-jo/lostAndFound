@@ -1,6 +1,6 @@
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Report lost item:</h4>
+        <h4 class="modal-title">Report <span *ngIf="isLost">lost</span> <span *ngIf="!isLost">found</span> item:</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -15,9 +15,16 @@
                             ng-reqired/>
                     </div>
                     <div class="form-group">
+                        <div *ngIf="isLost"> 
                         <label for="newDate">  Date lost </label>
                         <input id="newDate" name="newLostDate" type="date" [(ngModel)]="newItem.lostDate" class="form-control" required max="{{today | date:'yyyy-MM-dd'}}"
                         />
+                        </div>
+                        <div *ngIf="!isLost"> 
+                                <label for="newDate">  Date found </label>
+                                <input id="newDate" name="newFoundDate" type="date" [(ngModel)]="newItem.foundDate" class="form-control" required max="{{today | date:'yyyy-MM-dd'}}"
+                                />
+                                </div>
                     </div>
                     <div class="form-group">
                         <label for="itemSizes">Select item size</label>

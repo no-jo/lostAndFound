@@ -1,35 +1,104 @@
-<br>
-<div>
-  Insert search criteria: <br>
-  <label>name </label>
-  <input #searchItemName />
-  <label>  date </label>
-  <input type="date" #searchItemDate />
-  <button (click)="getItemsBy(searchItemName.value, searchItemDate.value)">
-    Filter
-  </button>
-  <button (click)="ngOnInit(); searchItemName.value =''">
-    Reset
-  </button>
-</div>
-
-<h3>These are all found items</h3>
-
-<ul class="items">
-    <li *ngFor="let item of items" [routerLink]="['/detail', item.id]">
-        <span class="badge">{{item.id}}</span>
-        <span>{{item.name}}</span>
-        <span class="date">{{item.foundDate}}</span>
-    </li>
-</ul>
-
-<div>
-    Report found item: <br>
-    <label>name </label>
-    <input #itemName />
-    <label>  date </label>
-    <input type="date" #itemDate />
-    <button (click)="add(itemName.value, itemDate.value); itemName.value=''">
-      Add
-    </button>
-</div>
+<div class="row">
+    <div class="col-md-6">
+      <add-item-modal [isLost]="false" (itemRet)="addNewItem($event)" ></add-item-modal>
+    </div>
+    <div class="col-md-6">
+      <button class="btn btn-lg btn-outline-primary" data-toggle="collapse" data-target="#collapseSearchCriteria" aria-expanded="false"
+        aria-controls="collapseSearchCriteria" style="width: 100%">Search item</button>
+    </div>
+  </div>
+  <div class="collapse" id="collapseSearchCriteria" style="border-style: solid; border-width: 1px; border-top-left-radius: 20px;
+  border-top-right-radius: 20px">
+    <br>
+    <h6>Insert search criteria: </h6>
+    <form #itemForm="ngForm" (ngSubmit)="getItemsBy()">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="newName"> Name </label>
+            <input type="text" name="newName" id="newName" [(ngModel)]="searchCriteria.nameLike" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="itemSizes">Select item size</label>
+            <select class="form-control" id="itemSizes" name="itemSizes" [(ngModel)]="searchCriteria.sizeIs">
+                    <option *ngFor="let size of sizes" [value]="size">{{size | lowercase}}</option>
+                  </select>
+          </div>
+          <div class="form-group">
+            <label for="newDate">  Date found from</label>
+            <input id="newDate" name="newFoundDate" type="date" [(ngModel)]="searchCriteria.foundDateAfter" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="newDate">  Date reported from </label>
+            <input id="newDate" name="newLostDate" type="date" [(ngModel)]="searchCriteria.creationDateAfter" class="form-control" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <label class="form-control-label" for="color"> Color </label>
+            <input type="text" name="color" id="color" [(ngModel)]="searchCriteria.colorLike" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label class="form-control-label" for="category"> Category </label>
+            <input type="text" name="category" id="category" [(ngModel)]="searchCriteria.categoryLike" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="newDate">  Date found to </label>
+            <input id="newDate" name="newFoundDate" type="date" [(ngModel)]="searchCriteria.foundDateBefore" class="form-control" max="{{today | date:'yyyy-MM-dd'}}"
+            />
+          </div>
+          <div class="form-group">
+            <label for="newDate">  Date reported to </label>
+            <input id="newDate" name="newLostDate" type="date" [(ngModel)]="searchCriteria.creationDateBefore" class="form-control" max="{{today | date:'yyyy-MM-dd'}}"
+            />
+          </div>
+        </div>
+      </div>
+        <div class="row form-group">
+            <div class="col-md-10">
+              </div>
+          <div class="col-md-2">
+              <button type="submit" class="btn btn-default">Submit</button>
+              <button type="button" class="btn btn-default" (click)="findAllFound()"> Reset</button>
+          </div>
+        </div>
+  
+    </form>
+  </div>
+  <br>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th></th>
+        <th>#<i class="fa fa-sort-asc" aria-hidden="true" (click)='OrderByArray("id",1)'></i><i class="fa fa-sort-desc" aria-hidden="true"
+            (click)='OrderByArray("id",-1)'></i></th>
+        <th>Name<i class="fa fa-sort-asc" aria-hidden="true" (click)='OrderByArray("name",1)'></i><i class="fa fa-sort-desc" aria-hidden="true"
+            (click)='OrderByArray("name",-1)'></i></th>
+        <th>Found on<i class="fa fa-sort-asc" aria-hidden="true" (click)='OrderByArray("dateLost",1)'></i><i class="fa fa-sort-desc"
+            aria-hidden="true" (click)='OrderByArray("dateLost",-1)'></i></th>
+        <th>Size<i class="fa fa-sort-asc" aria-hidden="true" (click)='OrderByArray("size",1)'></i><i class="fa fa-sort-desc" aria-hidden="true"
+            (click)='OrderByArray("size",-1)'></i></th>
+        <th>Category<i class="fa fa-sort-asc" aria-hidden="true" (click)='OrderByArray("category",1)'></i><i class="fa fa-sort-desc"
+            aria-hidden="true" (click)='OrderByArray("category",-1)'></i></th>
+        <th>Reported on<i class="fa fa-sort-asc" aria-hidden="true" (click)='OrderByArray("creationDate",1)'></i><i class="fa fa-sort-desc"
+            aria-hidden="true" (click)='OrderByArray("creationDate",-1)'></i></th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td></td>
+        <th scope=row>{{item.id}}</th>
+        <td>{{item.name}}</td>
+        <td>{{item.foundDate | date:'yyyy-MM-dd'}}</td>
+        <td>{{item.size | lowercase }}</td>
+        <td>{{item.category}}</td>
+        <td>{{item.creationDate | date:'yyyy-MM-dd hh:mm'}}</td>
+        <td>
+          <item-detail-modal [item]='item'></item-detail-modal>
+          <button class="btn btn-warning" mwlConfirmationPopover [title]="'WARNING'" [message]="'Are you sure?'" placement="right"
+            (confirm)="remove(item)"> Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
