@@ -1,0 +1,42 @@
+<ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+            <h4 class="modal-title">Create new user:</h4>
+            <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        <div class="modal-body">
+            <form #itemForm="ngForm" (ngSubmit)="add(); c('Close click')">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group has-danger">
+                            <label class="form-control-label" for="newlogin"> login </label>
+                            <input type="text" name="newlogin" id="newlogin" [(ngModel)]="newUser.login" class="form-control form-control-danger" required/>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="email"> email </label>
+                            <input type="text" name="email" id="email" [(ngModel)]="newUser.email" class="form-control" required/>
+                        </div>
+                    </div>
+    
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="firstname"> first name </label>
+                            <input type="text" name="firstname" id="firstname" [(ngModel)]="newUser.firstName" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-control-label" for="lastname"> last name </label>
+                            <input type="text" name="lastname" id="lastname" [(ngModel)]="newUser.lastName" class="form-control" />
+                        </div>
+                         <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary" [disabled]="!itemForm.form.valid"> Add </button>
+                            <button type="button" class="btn btn-default" (click)="c('Close click')">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+    
+            </form>
+        </div>
+    </ng-template>
+    
+    <button class="btn btn-lg btn-outline-primary" (click)="open(content)" style="width: 100%">Create user</button>

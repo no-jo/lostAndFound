@@ -13,8 +13,11 @@ import { ItemDetailComponent } from './components/item-detail.component';
 import { ItemDetailModalComponent } from './components/item-detail-modal.component';
 import { AddItemModalComponent } from './components/add-item-modal.component';
 import { WelcomeComponent } from './components/welcome.component';
+import { UserComponent } from './components/user.component';
+import { AddUserModalComponent } from './components/add-user-modal.component';
 
 import { ItemService } from './services/item.service';
+import { UserService } from './services/user.service';
 import { MetadataService } from './services/metadata.service';
 
 @NgModule({
@@ -25,7 +28,9 @@ import { MetadataService } from './services/metadata.service';
     ItemDetailComponent,
     ItemDetailModalComponent,
     AddItemModalComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    UserComponent,
+    AddUserModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +42,7 @@ import { MetadataService } from './services/metadata.service';
       confirmButtonType: 'danger' // set defaults here
     }),
   ],
-  providers: [ItemService, MetadataService],
+  providers: [ItemService, MetadataService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
