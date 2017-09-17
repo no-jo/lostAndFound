@@ -36,6 +36,13 @@ export class ItemService {
     .map(data => data.json());
   }
 
+  getWishlistByUser(userId: number): Observable<Item[]> {
+    const url = `${this.itemsUrl}/user?id=${userId}`;
+    return this.http
+      .get(url)
+      .map(data => data.json());
+  }
+
   delete(item: Item): Observable<Item> {
     const url = `${this.itemsUrl}/id?id=${item.id}`;
     return this.http

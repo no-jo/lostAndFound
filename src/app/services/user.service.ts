@@ -38,11 +38,17 @@ export class UserService {
       .map(data => data.json());
   }
 
+  update(user: User): Observable<User> {
+    const url = `${this.usersUrl}/id`;
+    return this.http
+        .post(url, JSON.stringify(user), { headers: this.headers })
+        .map(data => data.json());
+  }
+
   createUser(newUser: User): Observable<User> {
     const url = `${this.usersUrl}/id`;
     return this.http
         .put(url, JSON.stringify(newUser), { headers: this.headers })
         .map(data => data.json());
   }
-
 }

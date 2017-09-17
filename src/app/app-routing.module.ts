@@ -6,6 +6,7 @@ import { FoundItemsComponent } from './components/found-items.component';
 import { ItemDetailComponent } from './components/item-detail.component';
 import { WelcomeComponent } from './components/welcome.component';
 import { UserComponent } from './components/user.component';
+import { WishlistComponent } from './components/wishlist.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -13,7 +14,8 @@ const routes: Routes = [
   { path: 'found', component: FoundItemsComponent },
   { path: 'detail/:id', component: ItemDetailComponent },
   { path: 'welcome', component: WelcomeComponent},
-  { path: 'user', component: UserComponent}
+  { path: 'user', component: UserComponent},
+  { path: 'requests/:id', component: WishlistComponent}
 ];
 
 @NgModule({

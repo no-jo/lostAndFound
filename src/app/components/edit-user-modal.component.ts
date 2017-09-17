@@ -8,12 +8,12 @@ import { MetadataService } from '../services/metadata.service';
 import { NgbModal, NgbModalOptions, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    selector: 'add-user-modal',
-    templateUrl: './add-user-modal.component.html'
+    selector: 'edit-user-modal',
+    templateUrl: './edit-user-modal.component.html'
 })
-export class AddUserModalComponent {
+export class EditUserModalComponent {
     @Output() userRet: EventEmitter<User> = new EventEmitter<User>();
-    newUser: User = new User();
+    @Input() newUser: User = new User();
 
     constructor(private modalService: NgbModal,
         private userService: UserService,
@@ -23,8 +23,8 @@ export class AddUserModalComponent {
         this.modalService.open(content,{size: 'lg'});
     }
 
-    add(): void {
-        this.userService.createUser(this.newUser).subscribe(data => this.userRet.emit(data));
+    save(): void {
+        this.userService.update(this.newUser).subscribe(data => this.userRet.emit(data));
         this.newUser = new User();
     }
 }
