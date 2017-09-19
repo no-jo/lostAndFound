@@ -12,14 +12,13 @@
     </thead>
     <tbody>
         <tr *ngIf="wishlist.length === 0"><td></td><td></td><td>no items in wishlist</td></tr>
-        <tr *ngFor="let item of wishlist">
+        <tr *ngFor="let req of wishlist">
             <td></td>
-            <th scope=row>{{item.id}}</th>
-            <td>{{item.name}}</td>
-            <td>{{item.category}}</td>
-            <td>{{item.creationDate | date:'yyyy-MM-dd hh:mm'}}</td>
-            <td>
-            </td>
+            <th scope=row>{{req.item.id}}</th>
+            <td>{{req.item.name}}</td>
+            <td>{{req.item.category}}</td>
+            <td>{{req.item.creationDate | date:'yyyy-MM-dd hh:mm'}}</td>
+            <td>{{req.rating}}</td>
         </tr>
     </tbody>
 </table>

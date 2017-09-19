@@ -25,10 +25,8 @@ export class RequestService {
   }
 
   getRequestsBy(userId: number): Observable<Request[]> {
-    const url = `${this.itemsUrl}/`;
-    return this.http
-    .post(url, JSON.stringify(userId), { headers: this.headers })
-    .map(data => data.json());
+    const url = `${this.itemsUrl}/user?id=${userId}`;
+    return this.http.get(url).map(data => data.json());
   }
 
   delete(req: Request): Observable<Request> {

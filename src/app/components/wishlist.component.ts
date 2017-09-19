@@ -7,6 +7,7 @@ import { ItemService } from '../services/item.service';
 import { UserService } from '../services/user.service';
 import { Item } from '../enitities/item';
 import { User } from '../enitities/user';
+import { Request } from '../enitities/request';
 
 @Component({
     selector: 'wishlist',
@@ -15,7 +16,7 @@ import { User } from '../enitities/user';
 
 export class WishlistComponent implements OnInit {
     user: User = new User;
-    wishlist: Item[] = [];
+    wishlist: Request[] = [];
 
     constructor(
         private requestService: RequestService,
@@ -28,7 +29,7 @@ export class WishlistComponent implements OnInit {
     ngOnInit(): void {
         this.route.paramMap
             .switchMap((params: ParamMap) => this.userService.getUser(+params.get('id')))
-            .subscribe(u => {this.user = u; this.itemService.getWishlistByUser(this.user.id).subscribe(data => this.wishlist = data)});
+            .subscribe(u => {this.user = u; this.requestService.getRequestsBy(this.user.id).subscribe(data => this.wishlist = data)});
     }
 
     goBack(): void {
