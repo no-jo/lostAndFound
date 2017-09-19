@@ -13,7 +13,6 @@ import { UserService } from '../services/user.service';
 import { MetadataService } from '../services/metadata.service';
 
 import { UserComponent } from '../components/user.component';
-//import { AddUserModalComponent } from '../components/add-user-modal.component'; 
 
 import { FormsModule } from '@angular/forms';
 
@@ -29,7 +28,7 @@ describe('UserComponent', () => {
 
     const item: Item = { name: "test name", id: 202, lostDate: null, category: "something", color: null, creationDate: null, description: null, foundDate: new Date(), isActive: "ACITVE", material: null, photoURL: null, size: null };
     const users: User[] = [{ id: 150, email: "a@a.a", firstName: "Ala", IsActive: IsActive.ACTIVE, lastName: "Kot", login: "aak" },
-                            {id: 190, email: "b@b.b", firstName: "Bab", IsActive: IsActive.ACTIVE, lastName: "Mam", login: "baa"}];
+    { id: 190, email: "b@b.b", firstName: "Bab", IsActive: IsActive.ACTIVE, lastName: "Mam", login: "baa" }];
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -37,7 +36,7 @@ describe('UserComponent', () => {
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [FormsModule, RouterModule, ConfirmationPopoverModule.forRoot({
                 confirmButtonType: 'danger' // set defaults here
-              })],
+            })],
             providers: [
                 { provide: ItemService },
                 { provide: UserService },
@@ -50,9 +49,6 @@ describe('UserComponent', () => {
     // synchronous beforeEach
     beforeEach(() => {
         fixture = TestBed.createComponent(UserComponent);
-        // itemServiceClone = fixture.debugElement.injector.get(ItemService);
-        // spy = spyOn(itemServiceClone, 'getItem')
-        //     .and.returnValue(Promise.resolve(item));
     });
 
     it('should create the component', () => {

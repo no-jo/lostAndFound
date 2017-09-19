@@ -8,29 +8,16 @@ import { Params, ActivatedRoute } from '@angular/router';
 import {Observable} from 'rxjs/Observable';
 
 import { ItemService } from '../services/item.service';
+import { UserService } from '../services/user.service';
 
 import { Item } from '../enitities/item';
+import { User, IsActive } from '../enitities/user';
 import { ItemDetailComponent } from '../components/item-detail.component';
 import { FoundItemsComponent } from '../components/found-items.component';
 
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-export class ActivatedRouteStub
-{
-    private subject = new BehaviorSubject(this.testParams);
-    params = this.subject.asObservable();
-
-    private _testParams: {};
-    get testParams() { return this._testParams; }
-    set testParams(params: {}) {
-        this._testParams = params;
-        this.subject.next(params);
-    }
-}
-
 describe('ItemDetailsComponent', () => {
-    let mockParams, mockActivatedRoute;
-
     let comp: ItemDetailComponent;
     let fixture: ComponentFixture<ItemDetailComponent>;
     let de: DebugElement;
@@ -40,16 +27,25 @@ describe('ItemDetailsComponent', () => {
     let spy;
     const route = "http://localhost:4200/detail/";
     const item: Item = { name: "test name", id: 202, lostDate: null, category: "something", color: null, creationDate: null, description: null, foundDate: new Date(), isActive: "ACITVE", material: null, photoURL: null, size: null };
+    const users: User[] = [{ id: 150, email: "a@a.a", firstName: "Ala", IsActive: IsActive.ACTIVE, lastName: "Kot", login: "aak" },
+    {id: 190, email: "b@b.b", firstName: "Bab", IsActive: IsActive.ACTIVE, lastName: "Mam", login: "baa"}];
+
+    let mockActivatedRoute = {
+        snapshot: {
+          root: {
+            firstChild: { params: { id: 11 } }
+          }
+        }
+      };
 
     beforeEach(async(() => {
-        mockActivatedRoute = new ActivatedRouteStub();
-
         TestBed.configureTestingModule({
             declarations: [ItemDetailComponent],
             imports: [RouterTestingModule.withRoutes([{ path: 'http://localhost:4200/detail/', component: ItemDetailComponent }])],
             providers: [
                 { provide: ActivatedRoute, useValue: mockActivatedRoute},
                 { provide: ItemService },
+                { provide: UserService},
                 { provide: Location }
             ]
         })
@@ -59,7 +55,6 @@ describe('ItemDetailsComponent', () => {
     // synchronous beforeEach
     beforeEach(() => {
         fixture = TestBed.createComponent(ItemDetailComponent);
-        mockActivatedRoute.testParams = {id: '3'};
     });
 
     it('should create the component', () => {
@@ -67,11 +62,10 @@ describe('ItemDetailsComponent', () => {
         expect(c).toBeTruthy();
     });
 
-    //both work with ng test -sm=false
-    xit('should show item details', (async () => {
+    it('should show item details', (async () => {
         //given
         itemServiceClone = fixture.debugElement.injector.get(ItemService);
-        spy = jasmine.createSpy('getItem')
+        spy = spyOn(itemServiceClone, 'getItem')
             .and.returnValue(Promise.resolve(item));
         //when
         fixture.detectChanges();
@@ -80,7 +74,7 @@ describe('ItemDetailsComponent', () => {
         expect(el.textContent).toContain('13');
     }));
 
-    xit('go back should work', (async () => {
+    it('go back should work', (async () => {
         //given
         locationClone = fixture.debugElement.injector.get(Location);
         spy = spyOn(locationClone, 'back');
