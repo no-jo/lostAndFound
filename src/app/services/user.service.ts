@@ -51,4 +51,9 @@ export class UserService {
         .put(url, JSON.stringify(newUser), { headers: this.headers })
         .map(data => data.json());
   }
+
+  getUserQueueBy(itemId: number): Observable<User[]> {
+    const url = `${this.usersUrl}/item?id=${itemId}`;
+    return this.http.get(url).map(data => data.json());
+  }
 }

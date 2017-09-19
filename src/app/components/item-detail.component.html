@@ -1,9 +1,8 @@
 <div class="row">
     <div class="col-md-6">
-        <div id="itemId" ><label>Id: </label> {{item.id}}</div>
+        <div id="itemId"><label>Id: </label> {{item.id}}</div>
         <div> <label>Name: </label> {{item.name}}</div>
-        <div *ngIf="item.lostDate"> <label>Lost on: </label> {{item.lostDate| date:'yyyy-MM-dd'}}</div>
-        <div *ngIf="item.foundDate"> <label>Found on: </label> {{item.foundDate| date:'yyyy-MM-dd'}}</div>
+        <div> <label>Found on: </label> {{item.foundDate | date:'yyyy-MM-dd'}}</div>
         <div> <label>Size: </label> {{item.size | lowercase }}</div>
         <div> <label>Color: </label> {{item.color}}</div>
         <div> <label>Category: </label> {{item.category}}</div>
@@ -16,6 +15,37 @@
     </div>
 </div>
 <div class="row col-md-12">
-    <div> <label>Description: </label> {{item.description}}</div>
+    <div> <label>Description: </label>
+        <span *ngIf="item.description">{{item.description}}</span>
+        <span *ngIf="!item.description">no description available</span>
+    </div>
 </div>
+<br>
+<div *ngIf="!users.length"> <h6> No users in a queue for this item </h6></div>
+<div *ngIf="users.length">
+<h5> Users in a queue for this item: </h5>
+<table class="table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>#</th>
+            <th>login</th>
+            <th>email</th>
+            <th>First name</th>
+            <th>Last name</th>
+          </tr>
+        </thead>
+        <tbody>
+<tr *ngFor="let u of users">
+    <td></td>
+    <th scope=row>{{u.id}}</th>
+    <td>{{u.login}}</td>
+    <td>{{u.email}}</td>
+    <td>{{u.firstName}}</td>
+    <td>{{u.lastName}}</td>
+</tr>
+</tbody>
+</table>
+</div>
+<br>
 <button class='btn btn-primary' (click)="goBack()">Back</button>
