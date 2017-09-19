@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Item } from '../enitities/item';
-import { FormsModule }   from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  }   from '@angular/forms';
 
 import { ItemService } from '../services/item.service';
 import { MetadataService } from '../services/metadata.service';

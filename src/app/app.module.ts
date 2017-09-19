@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpModule } from '@angular/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
@@ -42,6 +42,7 @@ import { RequestService } from './services/request.service';
     AppRoutingModule,
     HttpModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule.forRoot(),
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger' // set defaults here

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-6">
-        <div><label>Id: </label> {{item.id}}</div>
+        <div id="itemId" ><label>Id: </label> {{item.id}}</div>
         <div> <label>Name: </label> {{item.name}}</div>
         <div *ngIf="item.lostDate"> <label>Lost on: </label> {{item.lostDate| date:'yyyy-MM-dd'}}</div>
         <div *ngIf="item.foundDate"> <label>Found on: </label> {{item.foundDate| date:'yyyy-MM-dd'}}</div>

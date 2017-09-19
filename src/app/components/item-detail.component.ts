@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Location } from '@angular/common';
 import 'rxjs/add/operator/switchMap';
@@ -11,7 +11,7 @@ import { Item } from '../enitities/item';
 })
 
 export class ItemDetailComponent implements OnInit {
-    @Input() item: Item;
+    item: Item;
 
     constructor(
         private itemService: ItemService,
@@ -20,9 +20,13 @@ export class ItemDetailComponent implements OnInit {
     ) { }
 
     ngOnInit(): void {
+        this.getItemDetails();
+    }
+
+    getItemDetails(): void {
         this.route.paramMap
-            .switchMap((params: ParamMap) => this.itemService.getItem(+params.get('id')))
-            .subscribe(item => this.item = item);
+        .switchMap((params: ParamMap) => this.itemService.getItem(+params.get('id')))
+        .subscribe(item => this.item = item);
     }
 
     goBack(): void {
