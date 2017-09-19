@@ -1,0 +1,40 @@
+<ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Choose item to add to wishlist:</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+    </div>
+    <div class="modal-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>#<i class="fa fa-sort-asc" aria-hidden="true" (click)='OrderByArray("id",1)'></i><i class="fa fa-sort-desc"
+                            aria-hidden="true" (click)='OrderByArray("id",-1)'></i></th>
+                    <th>Name<i class="fa fa-sort-asc" aria-hidden="true" (click)='OrderByArray("name",1)'></i><i class="fa fa-sort-desc"
+                            aria-hidden="true" (click)='OrderByArray("name",-1)'></i></th>
+                    <th>Lost on<i class="fa fa-sort-asc" aria-hidden="true" (click)='OrderByArray("dateLost",1)'></i><i class="fa fa-sort-desc"
+                            aria-hidden="true" (click)='OrderByArray("dateLost",-1)'></i></th>
+                    <th>Category<i class="fa fa-sort-asc" aria-hidden="true" (click)='OrderByArray("category",1)'></i><i class="fa fa-sort-desc"
+                            aria-hidden="true" (click)='OrderByArray("category",-1)'></i></th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of items">
+                    <td></td>
+                    <th scope=row>{{item.id}}</th>
+                    <td>{{item.name}}</td>
+                    <td>{{item.lostDate | date:'yyyy-MM-dd'}}</td>
+                    <td>{{item.category}}</td>
+                    <td>
+                        <button class="btn btn-primary" (click)="createRequest(item); c('Close click')"> Add</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</ng-template>
+
+<button class="btn btn-outline-primary" (click)="open(content)" [disabled]="itemsOnWishlist >= 3">Add item</button>

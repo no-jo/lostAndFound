@@ -18,6 +18,7 @@ import { AddUserModalComponent } from './components/add-user-modal.component';
 import { EditUserModalComponent } from './components/edit-user-modal.component';
 import { WishlistComponent } from './components/wishlist.component';
 import { RatingConfigComponent } from './components/rating-config.component';
+import { SelectItemModalComponent } from './components/select-item-modal.component';
 
 import { ItemService } from './services/item.service';
 import { UserService } from './services/user.service';
@@ -37,7 +38,8 @@ import { RequestService } from './services/request.service';
     AddUserModalComponent,
     EditUserModalComponent,
     WishlistComponent,
-    RatingConfigComponent
+    RatingConfigComponent,
+    SelectItemModalComponent
   ],
   imports: [
     BrowserModule,

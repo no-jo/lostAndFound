@@ -34,8 +34,9 @@
     </tbody>
 </table>
 <div class="row">
-    <div class="col-md-10"></div>
-    <div class="col-md-2">
+    <div class="col-md-9"></div>
+    <div class="col-md-3">
+        <select-item-modal [user]="user" [itemsOnWishlist]="wishlist.length" (requestRet)="addToWishlist($event)"></select-item-modal>
         <button class='btn btn-primary' (click)="goBack()">Back</button>
     </div>
 </div>
