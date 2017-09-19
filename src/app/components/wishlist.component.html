@@ -24,7 +24,7 @@
             <td>{{req.item.category}}</td>
             <td>{{req.creationDate | date:'yyyy-MM-dd hh:mm'}}</td>
             <td>
-                <ngbd-rating-config [(rate)]="req.rating"> </ngbd-rating-config>
+                <ngbd-rating-config [(rate)]="req.rating" [isReadOnly]="true"> </ngbd-rating-config>
             </td>
             <td>
                 <button class="btn btn-warning" mwlConfirmationPopover [title]="'WARNING'" [message]="'Are you sure?'" placement="right"

@@ -18,6 +18,7 @@ export class SelectItemModalComponent {
     @Input() itemsOnWishlist: number = 3;
     @Output() requestRet: EventEmitter<Request> = new EventEmitter<Request>();
     items: Item[] = [];
+    rate: number = 0;
 
     constructor(private modalService: NgbModal,
         private itemService: ItemService,
@@ -36,6 +37,7 @@ export class SelectItemModalComponent {
         let newReq = new Request();
         newReq.item = item;
         newReq.user = this.user;
+        newReq.rating = this.rate;
         this.requestService.create(newReq).subscribe(data => this.requestRet.emit(data));
     }
     

@@ -9,9 +9,10 @@ import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
 })
 export class RatingConfigComponent {
   @Input() rate;
+  @Input() isReadOnly = true;
     constructor(config: NgbRatingConfig) {
     // customize default values of ratings used by this component tree
     config.max = 5;
-    config.readonly = true;
+    config.readonly = this.isReadOnly;
   }
 }

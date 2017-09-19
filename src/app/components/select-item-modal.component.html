@@ -1,11 +1,14 @@
 <ng-template #content let-c="close" let-d="dismiss">
     <div class="modal-header">
-        <h4 class="modal-title">Choose item to add to wishlist:</h4>
+        <h4 class="modal-title">Choose rating and item to add to wishlist:</h4>
         <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                     <span aria-hidden="true">&times;</span>
                   </button>
     </div>
     <div class="modal-body">
+        <div><label>Rating: </label>
+            <ngb-rating [(rate)]="rate" ng-readonly="false" max="5"> </ngb-rating>
+        </div>
         <table class="table table-hover">
             <thead>
                 <tr>
