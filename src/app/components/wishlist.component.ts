@@ -9,9 +9,12 @@ import { Item } from '../enitities/item';
 import { User } from '../enitities/user';
 import { Request } from '../enitities/request';
 
+import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
     selector: 'wishlist',
-    templateUrl: './wishlist.component.html'
+    templateUrl: './wishlist.component.html',
+    providers: [NgbRatingConfig]
 })
 
 export class WishlistComponent implements OnInit {
@@ -30,6 +33,11 @@ export class WishlistComponent implements OnInit {
         this.route.paramMap
             .switchMap((params: ParamMap) => this.userService.getUser(+params.get('id')))
             .subscribe(u => {this.user = u; this.requestService.getRequestsBy(this.user.id).subscribe(data => this.wishlist = data)});
+    }
+
+    removeRequest(request: Request): void{
+        this.requestService.delete(request).subscribe(response => {
+            this.wishlist = this.wishlist.filter(req => req.id !== response.id);})
     }
 
     goBack(): void {

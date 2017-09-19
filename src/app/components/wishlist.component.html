@@ -6,20 +6,36 @@
             <th>#</th>
             <th>Name</th>
             <th>Category</th>
-            <th>Reported on</th>
+            <th>Submitted on</th>
             <th>Rating</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngIf="wishlist.length === 0"><td></td><td></td><td>no items in wishlist</td></tr>
+        <tr *ngIf="wishlist.length === 0">
+            <td></td>
+            <td></td>
+            <td>no items in wishlist</td>
+        </tr>
         <tr *ngFor="let req of wishlist">
             <td></td>
             <th scope=row>{{req.item.id}}</th>
             <td>{{req.item.name}}</td>
             <td>{{req.item.category}}</td>
-            <td>{{req.item.creationDate | date:'yyyy-MM-dd hh:mm'}}</td>
-            <td>{{req.rating}}</td>
+            <td>{{req.creationDate | date:'yyyy-MM-dd hh:mm'}}</td>
+            <td>
+                <ngbd-rating-config [(rate)]="req.rating"> </ngbd-rating-config>
+            </td>
+            <td>
+                <button class="btn btn-warning" mwlConfirmationPopover [title]="'WARNING'" [message]="'Are you sure?'" placement="right"
+                    (confirm)="removeRequest(req)"> Delete</button>
+            </td>
         </tr>
     </tbody>
 </table>
-<button class='btn btn-primary' (click)="goBack()">Back</button>
+<div class="row">
+    <div class="col-md-10"></div>
+    <div class="col-md-2">
+        <button class='btn btn-primary' (click)="goBack()">Back</button>
+    </div>
+</div>

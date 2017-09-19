@@ -17,4 +17,5 @@ export class Request {
 	status: Status;
 	userComment: string;
 	rating: number;
+	creationDate: Date;
 }
